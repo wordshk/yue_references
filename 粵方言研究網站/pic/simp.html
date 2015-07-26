@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>simp</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<!-- ImageReady Preload Script (simp.psd) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function newImage(arg) {
+	if (document.images) {
+		rslt = new Image();
+		rslt.src = arg;
+		return rslt;
+	}
+}
+
+function changeImages() {
+	if (document.images && (preloadFlag == true)) {
+		for (var i=0; i<changeImages.arguments.length; i+=2) {
+			document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
+		}
+	}
+}
+
+var preloadFlag = false;
+function preloadImages() {
+	if (document.images) {
+		simp_03_over = newImage("images/simp_03-over.gif");
+		simp_03_down = newImage("images/simp_03-down.gif");
+		preloadFlag = true;
+	}
+}
+
+// -->
+</SCRIPT>
+<!-- End Preload Script -->
+</HEAD>
+<BODY BGCOLOR=#FFFFFF ONLOAD="preloadImages();">
+<!-- ImageReady Slices (simp.psd) -->
+<TABLE WIDTH=96 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD COLSPAN=3>
+			<IMG SRC="images/simp_01.gif" WIDTH=96 HEIGHT=2></TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="images/simp_02.gif" WIDTH=12 HEIGHT=22></TD>
+		<TD>
+			<A HREF="traditional/"
+				ONMOUSEOVER="changeImages('simp_03', 'images/simp_03-over.gif'); return true;"
+				ONMOUSEOUT="changeImages('simp_03', 'images/simp_03.gif'); return true;"
+				ONMOUSEDOWN="changeImages('simp_03', 'images/simp_03-down.gif'); return true;"
+				ONMOUSEUP="changeImages('simp_03', 'images/simp_03-over.gif'); return true;">
+				<IMG NAME="simp_03" SRC="images/simp_03.gif" WIDTH=79 HEIGHT=22 BORDER=0></A></TD>
+		<TD>
+			<IMG SRC="images/simp_04.gif" WIDTH=5 HEIGHT=22></TD>
+	</TR>
+</TABLE>
+<!-- End ImageReady Slices -->
+</BODY>
+</HTML>

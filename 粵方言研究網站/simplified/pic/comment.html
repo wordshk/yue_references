@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<TITLE>comment</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<!-- ImageReady Preload Script (comment.psd) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function newImage(arg) {
+	if (document.images) {
+		rslt = new Image();
+		rslt.src = arg;
+		return rslt;
+	}
+}
+
+function changeImages() {
+	if (document.images && (preloadFlag == true)) {
+		for (var i=0; i<changeImages.arguments.length; i+=2) {
+			document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
+		}
+	}
+}
+
+var preloadFlag = false;
+function preloadImages() {
+	if (document.images) {
+		comment_01_over = newImage("images/comment_01-over.gif");
+		comment_01_down = newImage("images/comment_01-down.gif");
+		preloadFlag = true;
+	}
+}
+
+// -->
+</SCRIPT>
+<!-- End Preload Script -->
+</HEAD>
+<BODY BGCOLOR=#FFFFFF ONLOAD="preloadImages();">
+<!-- ImageReady Slices (comment.psd) -->
+<A HREF="#"
+	ONMOUSEOVER="changeImages('comment_01', 'images/comment_01-over.gif'); return true;"
+	ONMOUSEOUT="changeImages('comment_01', 'images/comment_01.gif'); return true;"
+	ONMOUSEDOWN="changeImages('comment_01', 'images/comment_01-down.gif'); return true;"
+	ONMOUSEUP="changeImages('comment_01', 'images/comment_01-over.gif'); return true;">
+	<IMG NAME="comment_01" SRC="images/comment_01.gif" WIDTH=98 HEIGHT=14 BORDER=0></A>
+<!-- End ImageReady Slices -->
+</BODY>
+</HTML>

@@ -1,0 +1,11 @@
+BODY {background-color: #FAFCFC;
+background-image:url("pic/background2.gif");
+   background-attachment:fixed;
+   background-repeat:no-repeat;
+   background-position:top right;
+}
+
+.space	  { color: FFFFFF;
+	  line-height: 0px;
+	  font-size: 8px;
+	  font-weight: 200;}

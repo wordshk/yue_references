@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>trad</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<!-- ImageReady Preload Script (trad.psd) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function newImage(arg) {
+	if (document.images) {
+		rslt = new Image();
+		rslt.src = arg;
+		return rslt;
+	}
+}
+
+function changeImages() {
+	if (document.images && (preloadFlag == true)) {
+		for (var i=0; i<changeImages.arguments.length; i+=2) {
+			document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
+		}
+	}
+}
+
+var preloadFlag = false;
+function preloadImages() {
+	if (document.images) {
+		trad_02_over = newImage("images/trad_02-over.gif");
+		trad_02_down = newImage("images/trad_02-down.gif");
+		preloadFlag = true;
+	}
+}
+
+// -->
+</SCRIPT>
+<!-- End Preload Script -->
+</HEAD>
+<BODY BGCOLOR=#FFFFFF ONLOAD="preloadImages();">
+<!-- ImageReady Slices (trad.psd) -->
+<TABLE WIDTH=96 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+			<IMG SRC="images/trad_01.gif" WIDTH=11 HEIGHT=24></TD>
+		<TD>
+			<A HREF="traditional/"
+				ONMOUSEOVER="changeImages('trad_02', 'images/trad_02-over.gif'); return true;"
+				ONMOUSEOUT="changeImages('trad_02', 'images/trad_02.gif'); return true;"
+				ONMOUSEDOWN="changeImages('trad_02', 'images/trad_02-down.gif'); return true;"
+				ONMOUSEUP="changeImages('trad_02', 'images/trad_02-over.gif'); return true;">
+				<IMG NAME="trad_02" SRC="images/trad_02.gif" WIDTH=80 HEIGHT=24 BORDER=0></A></TD>
+		<TD>
+			<IMG SRC="images/trad_03.gif" WIDTH=5 HEIGHT=24></TD>
+	</TR>
+</TABLE>
+<!-- End ImageReady Slices -->
+</BODY>
+</HTML>

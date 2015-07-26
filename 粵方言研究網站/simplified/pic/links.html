@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>links</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<!-- ImageReady Preload Script (links.psd) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function newImage(arg) {
+	if (document.images) {
+		rslt = new Image();
+		rslt.src = arg;
+		return rslt;
+	}
+}
+
+function changeImages() {
+	if (document.images && (preloadFlag == true)) {
+		for (var i=0; i<changeImages.arguments.length; i+=2) {
+			document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
+		}
+	}
+}
+
+var preloadFlag = false;
+function preloadImages() {
+	if (document.images) {
+		links_01_over = newImage("images/links_01-over.gif");
+		links_01_down = newImage("images/links_01-down.gif");
+		preloadFlag = true;
+	}
+}
+
+// -->
+</SCRIPT>
+<!-- End Preload Script -->
+</HEAD>
+<BODY BGCOLOR=#FFFFFF ONLOAD="preloadImages();">
+<!-- ImageReady Slices (links.psd) -->
+<A HREF="#"
+	ONMOUSEOVER="changeImages('links_01', 'images/links_01-over.gif'); return true;"
+	ONMOUSEOUT="changeImages('links_01', 'images/links_01.gif'); return true;"
+	ONMOUSEDOWN="changeImages('links_01', 'images/links_01-down.gif'); return true;"
+	ONMOUSEUP="changeImages('links_01', 'images/links_01-over.gif'); return true;"
+	ONCLICK="changeImages('links_01', 'images/links_01.gif');">
+	<IMG NAME="links_01" SRC="images/links_01.gif" WIDTH=56 HEIGHT=14 BORDER=0></A>
+<!-- End ImageReady Slices -->
+</BODY>
+</HTML>

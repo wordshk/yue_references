@@ -1,0 +1,10 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: #eeeeee; SCROLLBAR-HIGHLIGHT-COLOR: #e5ffff; SCROLLBAR-SHADOW-COLOR: #d40000; SCROLLBAR-3DLIGHT-COLOR: #d40000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #FFFFFF; SCROLLBAR-DARKSHADOW-COLOR: #FFFFFF; 
+background-color: #FAFCFC;
+background-image:url("pic/background.gif");
+   background-attachment:fixed;
+   background-repeat:no-repeat;
+   background-position:top; 
+
+}
+
