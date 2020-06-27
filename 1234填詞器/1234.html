@@ -43,12 +43,12 @@ function tf(c) {
     var cp = CPRONUNCIATION[c];
     if (cp) {
         var max = -1;
-        var res = 0;
+        var res = "0";
 
-        for (rnd in cp) {
-            if (cp[rnd] > max) {
-                max = cp[rnd];
-                res = parseInt(rnd.slice(-1));
+        for (wrd in cp) {
+            if (cp[wrd] > max) {
+                max = cp[wrd];
+                res = parseInt(wrd.slice(-1)) + "";
             }
         }
         res = res.replace("2", "1");
@@ -99,11 +99,10 @@ function update(e) {
         lst.push(selection[i]);
     }
 
-    // TODO: sorting by frequency.
-    console.log(lst);
+    // console.log(lst);
 
     lst.sort(cmp);
-    console.log(lst);
+    // console.log(lst);
 
     var htmlist = [];
 
