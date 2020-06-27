@@ -129,7 +129,7 @@ function update() {
     for (var i = 0; i < selection.length; i++) {
         if (rhyme) {
             var p = PRONUNCIATION[selection[i]][0].split(" ").slice(-1)[0].replace(/[0-9]/, "");
-            if (p.endsWith(rhyme) && p.match(RegExp("[^aeiouy]"+rhyme))) {
+            if (p == rhyme || p.endsWith(rhyme) && p.match(RegExp("[^aeiouy]"+rhyme))) {
                 lst.push(selection[i]);
             }
         } else {
