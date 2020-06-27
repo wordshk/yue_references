@@ -101,8 +101,8 @@ function cmp(a, b) {
     return fb - fa;
 }
 
-function update(e) {
-    var ri = e.value;
+function update() {
+    var ri = $("#inputtextbox")[0].value;
     // console.log(ri);
 
     var inp = "";
@@ -119,17 +119,25 @@ function update(e) {
         }
     }
 
-    console.log(ri, inp);
+    // console.log(ri, inp);
 
     var lst = [];
     var selection = TONES_TO_WORDS[inp] || [];
 
+    var rhyme = $("#rhyme")[0].value;
+
     for (var i = 0; i < selection.length; i++) {
-        lst.push(selection[i]);
+        if (rhyme) {
+            var p = PRONUNCIATION[selection[i]][0].split(" ").slice(-1)[0].replace(/[0-9]/, "");
+            if (p.endsWith(rhyme)) {
+                lst.push(selection[i]);
+            }
+        } else {
+            lst.push(selection[i]);
+        }
     }
 
     // console.log(lst);
-
     lst.sort(cmp);
     // console.log(lst);
 
@@ -170,7 +178,12 @@ body { font-size: 20px; }
 </style>
 <body>
 <h1>1234填詞器</h1>
- 打任何(數)字落去 => <input id="inputtextbox" type="text" oninput="update(this);" value="香港勁" /><label><input oninput="changestrict(this);" type="checkbox" id="strict" /> strict mode</label>
+ 打任何(數)字落去 => <input id="inputtextbox" type="text" oninput="update(this);" value="香港勁" />
+ <select id="rhyme" onchange="update()">
+  <option value="">韻腳</option>
+  <option value="aa">aa</option><option value="aai">aai</option><option value="aau">aau</option><option value="aam">aam</option><option value="aan">aan</option><option value="aang">aang</option><option value="aap">aap</option><option value="aat">aat</option><option value="aak">aak</option><option value="ai">ai</option><option value="au">au</option><option value="am">am</option><option value="an">an</option><option value="ang">ang</option><option value="ap">ap</option><option value="at">at</option><option value="ak">ak</option><option value="e">e</option><option value="ei">ei</option><option value="eu">eu</option><option value="em">em</option><option value="eng">eng</option><option value="ep">ep</option><option value="ek">ek</option><option value="i">i</option><option value="iu">iu</option><option value="im">im</option><option value="in">in</option><option value="ing">ing</option><option value="ip">ip</option><option value="it">it</option><option value="ik">ik</option><option value="o">o</option><option value="oi">oi</option><option value="ou">ou</option><option value="on">on</option><option value="ong">ong</option><option value="ot">ot</option><option value="ok">ok</option><option value="oe">oe</option><option value="oeng">oeng</option><option value="oek">oek</option><option value="eoi">eoi</option><option value="eon">eon</option><option value="eot">eot</option><option value="u">u</option><option value="ui">ui</option><option value="un">un</option><option value="ung">ung</option><option value="ut">ut</option><option value="uk">uk</option><option value="yu">yu</option><option value="yun">yun</option><option value="yut">yut</option><option value="m">m</option><option value="ng">ng</option>
+ </select>
+ <label><input oninput="changestrict(this);" type="checkbox" id="strict" /> strict mode</label>
  <div style="line-height: 2em;" id="list"></div>
  <br />
  <br />
