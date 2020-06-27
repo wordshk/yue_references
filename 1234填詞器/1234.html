@@ -120,6 +120,7 @@ function update(e) {
 
 window.onload = function() {
     $("#inputtextbox").focus();
+    update($("#inputtextbox")[0]);
 };
 
 </script>
@@ -131,7 +132,7 @@ body { font-size: 20px; }
 </style>
 <body>
 <h1>1234填詞器</h1>
- 打任何(數)字落去 => <input id="inputtextbox" type="text" oninput="update(this);" />
+ 打任何(數)字落去 => <input id="inputtextbox" type="text" oninput="update(this);" value="香港勁" />
  <div style="line-height: 2em;" id="list"></div>
 
  <br />
