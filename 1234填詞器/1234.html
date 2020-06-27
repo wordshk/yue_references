@@ -9,37 +9,54 @@
 <script src="pron.js"></script>
 <script>
 
+var usestrict = false;
+
+function squish(x) {
+    if (usestrict) {
+        return x;
+    }
+    if (x === 2) { return 1; }
+    if (x === 5) { return 3; }
+
+    var r = x + "";
+    r = r.replace("2", "1");
+    r = r.replace("5", "3");
+    return r;
+}
+
 MULTIPLE = {}
 
 TONES_TO_WORDS = {}
 
-for (var w in PRONUNCIATION) {
-    var ps = PRONUNCIATION[w];
-    if (ps.length > 1) {
-        MULTIPLE[w] = 1;
-    }
-    for (var i = 0 ; i < ps.length; i++) {
-        var p = ps[i];
-        var spl = p.split(' ');
-        var t = "";  // tone
-        for (var j = 0; j < spl.length; j++) {
-            t += spl[j].slice(-1);
+function regenerate_tones_cache() {
+    window.TONES_TO_WORDS = {};
+    for (var w in PRONUNCIATION) {
+        var ps = PRONUNCIATION[w];
+        if (ps.length > 1) {
+            MULTIPLE[w] = 1;
         }
+        for (var i = 0 ; i < ps.length; i++) {
+            var p = ps[i];
+            var spl = p.split(' ');
+            var t = "";  // tone
+            for (var j = 0; j < spl.length; j++) {
+                t += spl[j].slice(-1);
+            }
 
-        t = t.replace("2", "1");
-        t = t.replace("5", "3");
+            t = squish(t);
 
-        if (!TONES_TO_WORDS[t]) {
-            TONES_TO_WORDS[t] = [];
+            if (!window.TONES_TO_WORDS[t]) {
+                window.TONES_TO_WORDS[t] = [];
+            }
+
+            window.TONES_TO_WORDS[t].push(w);
         }
-
-        TONES_TO_WORDS[t].push(w);
     }
 }
 
 // console.log(TONES_TO_WORDS);
 
-C_TO_T = { "0": 4, "1": 1, "2": 6, "3": 1, "4": 3, "5": 3, "6": 6, "7": 1, "8": 3, "9": 1 };
+C_TO_T = { "0": 4, "1": 1, "2": 6, "3": 1, "4": 3, "5": squish(5), "6": 6, "7": 1, "8": 3, "9": squish(2) };
 
 function tf(c) {
     if (C_TO_T[c] !== undefined) {
@@ -56,9 +73,7 @@ function tf(c) {
                 res = parseInt(wrd.slice(-1)) + "";
             }
         }
-        res = res.replace("2", "1");
-        res = res.replace("5", "3");
-        return res;
+        return squish(res);
     }
 
     return 0;
@@ -91,14 +106,23 @@ function update(e) {
     // console.log(ri);
 
     var inp = "";
-    for (var i = 0; i < ri.length; i++) {
-        inp += tf(ri[i]);
+
+    // console.log(ri, PRONUNCIATION[ri]);
+    if (!PRONUNCIATION[ri]) {
+        for (var i = 0; i < ri.length; i++) {
+            inp += tf(ri[i]);
+        }
+    } else {
+        var splitter = PRONUNCIATION[ri][0].split(" ");
+        for (var i = 0; i < splitter.length; i++) {
+            inp += squish(splitter[i].slice(-1));
+        }
     }
 
-    // console.log(inp);
+    console.log(ri, inp);
 
     var lst = [];
-    var selection = TONES_TO_WORDS[inp];
+    var selection = TONES_TO_WORDS[inp] || [];
 
     for (var i = 0; i < selection.length; i++) {
         lst.push(selection[i]);
@@ -119,7 +143,20 @@ function update(e) {
     g.html(htmlist.join("\n"));
 }
 
+function changestrict(e) {
+    if (e.checked) {
+        window.usestrict = true;
+    } else {
+        window.usestrict = false;
+    }
+
+    regenerate_tones_cache();
+
+    update($("#inputtextbox")[0]);
+}
+
 window.onload = function() {
+    regenerate_tones_cache();
     $("#inputtextbox").focus();
     update($("#inputtextbox")[0]);
 };
@@ -133,9 +170,8 @@ body { font-size: 20px; }
 </style>
 <body>
 <h1>1234填詞器</h1>
- 打任何(數)字落去 => <input id="inputtextbox" type="text" oninput="update(this);" value="香港勁" />
+ 打任何(數)字落去 => <input id="inputtextbox" type="text" oninput="update(this);" value="香港勁" /><label><input oninput="changestrict(this);" type="checkbox" id="strict" /> strict mode</label>
  <div style="line-height: 2em;" id="list"></div>
-
  <br />
  <br />
  <br />
