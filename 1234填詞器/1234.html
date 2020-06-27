@@ -1,0 +1,126 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="freq.js"></script>
+<script src="pron.js"></script>
+<script>
+
+MULTIPLE = {}
+
+TONES_TO_WORDS = {}
+
+for (var w in PRONUNCIATION) {
+    var ps = PRONUNCIATION[w];
+    if (ps.length > 1) {
+        MULTIPLE[w] = 1;
+    }
+    for (var i = 0 ; i < ps.length; i++) {
+        var p = ps[i];
+        var spl = p.split(' ');
+        var t = "";  // tone
+        for (var j = 0; j < spl.length; j++) {
+            t += spl[j].slice(-1);
+        }
+
+        if (!TONES_TO_WORDS[t]) {
+            TONES_TO_WORDS[t] = [];
+        }
+
+        TONES_TO_WORDS[t].push(w);
+    }
+}
+
+C_TO_T = { "0": 4, "1": 1, "2": 6, "3": 1, "4": 3, "5": 5, "6": 6, "7": 1, "8": 3, "9": 2 };
+
+function tf(c) {
+    if (C_TO_T[c] !== undefined) {
+        return C_TO_T[c];
+    }
+    var cp = CPRONUNCIATION[c];
+    if (cp) {
+        var max = -1;
+        var res = 0;
+
+        for (rnd in cp) {
+            if (cp[rnd] > max) {
+                max = cp[rnd];
+                res = parseInt(rnd.slice(-1));
+            }
+        }
+        return res;
+    }
+
+    return 0;
+}
+
+function cmp(a, b) {
+    var fa = FREQ[a] || 0;
+    var fb = FREQ[b] || 0;
+
+    // if one of the characters that make up the word is frequent still use it
+    if (fa < 5 && fb < 5 && a.length > 0 && b.length > 0) {
+        if (a.length != b.length) {  // english words will skew up the results because latin chars have better frequency
+            return a.length - b.length;
+        } else {
+            fa = 0;
+            fb = 0;
+            for (var i = 0; i < a.length; i++) {
+                fa += CFREQ[a[i]];
+            }
+            for (var i = 0; i < b.length; i++) {
+                fb += CFREQ[b[i]];
+            }
+        }
+    }
+    return fb - fa;
+}
+
+function update(e) {
+    var ri = e.value;
+    // console.log(ri);
+
+    var inp = "";
+    for (var i = 0; i < ri.length; i++) {
+        inp += tf(ri[i]);
+    }
+
+    // console.log(inp);
+
+    var lst = [];
+    var selection = TONES_TO_WORDS[inp];
+
+    for (var i = 0; i < selection.length; i++) {
+        lst.push(selection[i]);
+    }
+
+    // TODO: sorting by frequency.
+    console.log(lst);
+
+    lst.sort(cmp);
+    console.log(lst);
+
+    var htmlist = [];
+
+    for (var i = 0; i < lst.length; i++) {
+        htmlist.push("<span class='result_word'><a href='https://words.hk/zidin/"+lst[i]+"' target=_blank>" + lst[i] + "</a></span>");
+    }
+
+    var g = $("#list");
+    g.html(htmlist.join("\n"));
+}
+
+window.onload = function() {
+    $("#inputtextbox").focus();
+};
+
+</script>
+<style>
+span.result_word { background-color: #efeff8; padding: 0.1em; margin: 0em 0.2em; white-space: nowrap; }
+a { text-decoration: none; color: #000; }
+a:hover { color: #666; }
+body { font-size: 20px; }
+</style>
+<body>
+ 打任何(數)字落去 => <input id="inputtextbox" type="text" oninput="update(this);" />
+ <div style="line-height: 2em;" id="list"></div>
+</body>
+</html>
