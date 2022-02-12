@@ -33,6 +33,13 @@ var jyutpings = {};
 for (var obj in CHARLIST) {
     var jps = CHARLIST[obj];
     // console.log(jps);
+    var o = obj.charCodeAt(0);
+    if (!((0x3400 <=  o && o  <= 0x4DBF) || (0x4E00 <=  o && o  <= 0x9FFF) || (0xF900 <=  o && o  <= 0xFAFF) || (0x20000 <=  o && o  <= 0x2FFFF))) {
+        if (obj.length == 1) { // quick workaround for chars outside BMP
+            // console.log("NOT CJK", o, obj);
+            continue;
+        }
+    }
 
     // Count the total number of pronunciations (so that we know whether a pronunciation is "typical" or not (i.e. probably wrong)
     var total = 0;
