@@ -56,11 +56,7 @@ for r in ranges:
 
 cmd1 = ["pyftsubset", sys.argv[2] + "/Jigmo.ttf", "--unicodes=" + ",".join(arg1), "--output-file=./Jigmo1Subset.ttf"]
 cmd2 = ["pyftsubset", sys.argv[2] + "/Jigmo2.ttf", "--unicodes=" + ",".join(arg2), "--output-file=./Jigmo2Subset.ttf"]
-
-# XXX: Somehow this doesn't seem to work. I'm too unfamiliar with the fonttools
-# and font formats/fundamentals to debug this. So we're just going to use the
-# whole font for this one. Still keeping this here for reference/completeness.
-cmd3 = ["pyftsubset", sys.argv[2] + "Jigmo3.ttf", "--unicodes=" + ",".join(arg3), "--output-file=./Jigmo3Subset.ttf"]
+cmd3 = ["pyftsubset", sys.argv[2] + "/Jigmo3.ttf", "--unicodes=" + ",".join(arg3), "--output-file=./Jigmo3Subset.ttf"]
 
 print(cmd1)
 print(cmd2)
@@ -71,7 +67,7 @@ subprocess.run(cmd2)
 subprocess.run(cmd3)
 
 # Merge the subsets, note that we're not using the third subset, see comments above.
-cmd4 = ["pyftmerge", "./Jigmo1Subset.ttf", "./Jigmo2Subset.ttf", sys.argv[2] + "/Jigmo3.ttf", "--output-file=./JigmoForHeiSiuZaap.ttf"]
+cmd4 = ["pyftmerge", "./Jigmo1Subset.ttf", "./Jigmo2Subset.ttf", "./Jigmo3Subset.ttf", "--output-file=./JigmoForHeiSiuZaap.ttf"]
 cmd5 = ["woff2_compress", "./JigmoForHeiSiuZaap.ttf"]
 subprocess.run(cmd4)
 subprocess.run(cmd5)
