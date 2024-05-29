@@ -35,6 +35,7 @@ for cp in sorted(used_codepoints):
         ranges.append((start, end))
         start = cp
         end = cp
+ranges.append((start, end))
 
 arg1 = []
 arg2 = []
